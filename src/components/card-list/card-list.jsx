@@ -1,7 +1,11 @@
-import React from "react"
-import "./card-list.scss"
+import React from "react";
+import { Card } from "../card/card";
+import "./card-list.scss";
 
-export const CardList = props => {
-    console.log(props);
-    return <div className="card-list">{props.children}</div>;
-}
+export const CardList = props => (
+  <div className="card-list">
+    {props.students.map(student => (
+      <Card key={student.id} student={student} />
+    ))}
+  </div>
+);
