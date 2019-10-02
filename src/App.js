@@ -17,7 +17,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CardList students={this.state.students}/>
+        <input
+          type="search"
+          placeholder="Search Student"
+          onChange={e => {
+            this.setState({ searchField: e.target.value }, () => {
+              // If we wanna do something right after we set it, then we have to set it inside the second argument
+              // Call "right after setState"
+              console.log(this.state);
+            });
+          }}
+        />
+        <CardList students={this.state.students} />
       </div>
     );
   }
