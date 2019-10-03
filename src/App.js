@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { CardList } from "./components/card-list/card-list";
+import { SearchBox } from "./components/search-box/search-box";
 import "./App.css";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      students: []
+      students: [],
+      searchField: ""
     };
   }
   componentDidMount() {
@@ -15,20 +17,20 @@ class App extends Component {
       .then(users => this.setState({ students: users }));
   }
   render() {
+    const { students, searchField } = this.state;
+    const filterStudents = students.filter(student =>
+      student.name.toLowerCase().includes(searchField.toLowerCase())
+    );
+
     return (
       <div className="App">
-        <input
-          type="search"
+        <SearchBox
           placeholder="Search Student"
-          onChange={e => {
-            this.setState({ searchField: e.target.value }, () => {
-              // If we wanna do something right after we set it, then we have to set it inside the second argument
-              // Call "right after setState"
-              console.log(this.state);
-            });
+          handelChange={e => {
+            this.setState({ searchField: e.target.value });
           }}
         />
-        <CardList students={this.state.students} />
+        <CardList students={filterStudents} />
       </div>
     );
   }
