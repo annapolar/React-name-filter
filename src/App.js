@@ -16,6 +16,11 @@ class App extends Component {
       .then(response => response.json())
       .then(users => this.setState({ students: users }));
   }
+
+  handelChange = e => {
+    this.setState({ searchField: e.target.value });
+  };
+
   render() {
     const { students, searchField } = this.state;
     const filterStudents = students.filter(student =>
@@ -26,9 +31,7 @@ class App extends Component {
       <div className="App">
         <SearchBox
           placeholder="Search Student"
-          handelChange={e => {
-            this.setState({ searchField: e.target.value });
-          }}
+          handelChange={this.handelChange}
         />
         <CardList students={filterStudents} />
       </div>
