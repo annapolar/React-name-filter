@@ -8,7 +8,8 @@ class App extends Component {
     super();
     this.state = {
       students: [],
-      searchField: ""
+      searchField: "",
+      text:""
     };
   }
   componentDidMount() {
@@ -29,6 +30,8 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Student List</h1>
+        <h2>You search: {searchField}</h2>
         <SearchBox
           placeholder="Search Student"
           handelChange={this.handelChange}
